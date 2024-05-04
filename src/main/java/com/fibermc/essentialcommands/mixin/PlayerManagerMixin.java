@@ -7,6 +7,8 @@ import com.fibermc.essentialcommands.events.PlayerConnectCallback;
 import com.fibermc.essentialcommands.events.PlayerLeaveCallback;
 import com.fibermc.essentialcommands.events.PlayerRespawnCallback;
 import com.fibermc.essentialcommands.playerdata.PlayerDataManager;
+import com.fibermc.essentialcommands.types.MinecraftLocation;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import io.github.ladysnake.pal.Pal;
@@ -18,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -41,6 +44,30 @@ public abstract class PlayerManagerMixin {
         PlayerConnectCallback.EVENT.invoker().onPlayerConnect(connection, player);
         // Just to be _super_ sure there is no incorrect persistance of this invuln.
         Pal.revokeAbility(player, VanillaAbilities.INVULNERABLE, ECAbilitySources.AFK_INVULN);
+    }
+
+    @ModifyExpressionValue(
+        method = "onPlayerConnect",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/MinecraftServer;getWorld(Lnet/minecraft/registry/RegistryKey;)Lnet/minecraft/server/world/ServerWorld;"
+        )
+    )
+    public ServerWorld onPlayerConnect_firstConnect_spawnPositionOverride(
+        ServerWorld original,
+        @Local(ordinal = 0) ServerPlayerEntity player,
+        @Local(ordinal = 0) NbtCompound playerNbt
+    ) {
+        if (playerNbt != null) {
+            // player data existed, definitely isn't first join
+            return original;
+        }
+        MinecraftLocation[] location = new MinecraftLocation[1];
+        PlayerDataManager.handleRespawnAtEcSpawn(null, (spawnPos) -> {
+            location[0] = spawnPos;
+        });
+        player.setPosition(location[0].pos());
+        return original.getServer().getWorld(location[0].dim());
     }
 
     @Inject(method = "remove", at = @At("HEAD"))

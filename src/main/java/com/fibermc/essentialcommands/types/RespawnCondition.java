@@ -4,5 +4,6 @@ public enum RespawnCondition {
     Never,
     Always,
     NoBed,
-    SameWorld
+    SameWorld,
+    FirstJoin
 }

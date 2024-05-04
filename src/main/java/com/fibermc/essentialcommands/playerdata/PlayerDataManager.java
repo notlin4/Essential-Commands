@@ -182,6 +182,9 @@ public class PlayerDataManager {
         newPlayerAccess.ec$setProfile(profile);
     }
 
+    /**
+     * @param oldPlayerEntity null if first spawn
+     */
     public static void handleRespawnAtEcSpawn(
         ServerPlayerEntity oldPlayerEntity,
         Consumer<MinecraftLocation> onOverwriteSpawn
@@ -211,6 +214,7 @@ public class PlayerDataManager {
                     case Always -> true;
                     case SameWorld -> isSameWorld();
                     case NoBed -> hasNoBed();
+                    case FirstJoin -> oldPlayerEntity == null;
                 };
             }
         };
