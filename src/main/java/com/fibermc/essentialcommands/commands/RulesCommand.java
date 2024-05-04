@@ -1,11 +1,11 @@
 package com.fibermc.essentialcommands.commands;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import com.fibermc.essentialcommands.EssentialCommands;
 import com.fibermc.essentialcommands.playerdata.PlayerData;
-import com.fibermc.essentialcommands.util.FileUtil;
 
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -48,6 +48,7 @@ public final class RulesCommand {
         if (rulesFile.createNewFile()) {
             EssentialCommands.LOGGER.info("Created rules file at path: " + rulesFile.toPath());
         }
-        rulesText = TextUtil.parseText(FileUtil.readString(rulesFile.toPath()));
+        String rulesStr = String.join(System.lineSeparator(), Files.readAllLines(rulesFile.toPath()));
+        rulesText = TextUtil.parseText(rulesStr);
     }
 }
