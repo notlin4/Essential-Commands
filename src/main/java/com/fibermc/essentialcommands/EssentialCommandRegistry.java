@@ -619,7 +619,7 @@ public final class EssentialCommandRegistry {
 
         essentialCommandsRootNode.addChild(configNode);
 
-        if (true) {
+        if (CONFIG.ENABLE_DELETE_ALL_PLAYER_DATA) {
             essentialCommandsRootNode.addChild(CommandManager.literal("deleteAllPlayerData")
                 .requires(source -> source.hasPermissionLevel(4))
                 .executes(new ClearPlayerDataCommand())
