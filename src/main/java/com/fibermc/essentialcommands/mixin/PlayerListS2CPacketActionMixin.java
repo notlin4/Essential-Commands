@@ -33,7 +33,15 @@ public class PlayerListS2CPacketActionMixin {
             // Need to use the backing config, since this lambda captures the field value.
             if (BACKING_CONFIG.NICKNAME_ABOVE_HEAD.getValue()) {
                 var id = entry.profileId();
-                var displayName = PlayerDataManager.getInstance().getByUuid(id).getPlayer().getDisplayName();
+                var playerData = PlayerDataManager.getInstance().getByUuid(id);
+                if (playerData == null) {
+                    // playerData may return null in some cases.
+                    // One known case is when a Taterzen from the Taterzens mod
+                    // is added.
+                    vanillaWriter.write(buf, entry);
+                    return;
+                }
+                var displayName = playerData.getPlayer().getDisplayName();
                 var displayNameString = displayName.asTruncatedString(16);
                 buf.writeString(displayNameString, 16);
                 PacketCodecs.PROPERTY_MAP.encode(buf, entry.profile().getProperties());
