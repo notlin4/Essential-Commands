@@ -38,11 +38,12 @@ public class PlayerProfile extends PersistentState implements IServerPlayerEntit
         this.profileOptions = new ProfileOptions();
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private static final class ProfileOptions {
-        private Style formattingDefault;
-        private Style formattingAccent;
-        private Style formattingError;
-        private boolean printTeleportCoordinates = true;
+        private Optional<Style> formattingDefault = Optional.empty();
+        private Optional<Style> formattingAccent = Optional.empty();
+        private Optional<Style> formattingError = Optional.empty();
+        private Optional<Boolean> printTeleportCoordinates = Optional.empty();
     }
 
     public static final Map<String, ProfileOption<?>> OPTIONS = Map.ofEntries(
@@ -51,22 +52,22 @@ public class PlayerProfile extends PersistentState implements IServerPlayerEntit
             new ProfileOption<>(
                 BoolArgumentType.bool(),
                 false,
-                (context, name, profile) -> profile.profileOptions.printTeleportCoordinates = BoolArgumentType.getBool(context, name),
+                (context, name, profile) -> profile.profileOptions.printTeleportCoordinates = Optional.of(BoolArgumentType.getBool(context, name)),
                 (profile) -> profile.profileOptions.printTeleportCoordinates)),
         new SimpleEntry<>(
             StorageKey.FORMATTING_DEAULT,
             new ProfileOption<>(
                 StringArgumentType.greedyString(),
                 null,
-                (context, name, profile) -> profile.profileOptions.formattingDefault = ConfigUtil.parseStyle(StringArgumentType.getString(context, name)),
-                (profile) -> ConfigUtil.serializeStyle(profile.profileOptions.formattingDefault))),
+                (context, name, profile) -> profile.profileOptions.formattingDefault = Optional.ofNullable(ConfigUtil.parseStyle(StringArgumentType.getString(context, name))),
+                (profile) -> profile.profileOptions.formattingDefault.map(ConfigUtil::serializeStyle))),
         new SimpleEntry<>(
             StorageKey.FORMATTING_ACCENT,
             new ProfileOption<>(
                 StringArgumentType.greedyString(),
                 null,
-                (context, name, profile) -> profile.profileOptions.formattingAccent = ConfigUtil.parseStyle(StringArgumentType.getString(context, name)),
-                (profile) -> ConfigUtil.serializeStyle(profile.profileOptions.formattingAccent)))
+                (context, name, profile) -> profile.profileOptions.formattingAccent = Optional.ofNullable(ConfigUtil.parseStyle(StringArgumentType.getString(context, name))),
+                (profile) -> profile.profileOptions.formattingAccent.map(ConfigUtil::serializeStyle)))
 //        new SimpleEntry<>(
 //            StorageKey.FORMATTING_ERROR,
 //            new ProfileOption<>(
@@ -76,20 +77,20 @@ public class PlayerProfile extends PersistentState implements IServerPlayerEntit
 //                (profile) -> ConfigUtil.serializeStyle(profile.profileOptions.formattingError)))
     );
 
-    public boolean shouldPrintTeleportCoordinates() {
+    public Optional<Boolean> shouldPrintTeleportCoordinates() {
         return profileOptions.printTeleportCoordinates;
     }
 
     public @Nullable Style getFormattingDefault() {
-        return profileOptions.formattingDefault;
+        return profileOptions.formattingDefault.orElse(null);
     }
 
     public @Nullable Style getFormattingAccent() {
-        return profileOptions.formattingAccent;
+        return profileOptions.formattingAccent.orElse(null);
     }
 
     public @Nullable Style getFormattingError() {
-        return profileOptions.formattingError;
+        return profileOptions.formattingError.orElse(null);
     }
 
     private static final class StorageKey {
@@ -102,33 +103,38 @@ public class PlayerProfile extends PersistentState implements IServerPlayerEntit
     public void fromNbt(NbtCompound tag) {
         NbtCompound dataTag = tag.getCompound("data");
         this.profileOptions = new ProfileOptions();
+
         this.profileOptions.formattingDefault = Optional.ofNullable(dataTag.get(StorageKey.FORMATTING_DEAULT))
             .map(NbtElement::asString)
-            .map(ConfigUtil::parseStyle)
-            .orElse(null);
+            .map(ConfigUtil::parseStyle);
+
         this.profileOptions.formattingAccent = Optional.ofNullable(dataTag.get(StorageKey.FORMATTING_ACCENT))
             .map(NbtElement::asString)
-            .map(ConfigUtil::parseStyle)
-            .orElse(null);
+            .map(ConfigUtil::parseStyle);
+
         this.profileOptions.formattingError = Optional.ofNullable(dataTag.get(StorageKey.FORMATTING_ERROR))
             .map(NbtElement::asString)
-            .map(ConfigUtil::parseStyle)
-            .orElse(null);
-        this.profileOptions.printTeleportCoordinates = dataTag.getBoolean(StorageKey.PRINT_TELEPORT_COORDINATES);
+            .map(ConfigUtil::parseStyle);
+
+        this.profileOptions.printTeleportCoordinates = dataTag.contains(StorageKey.PRINT_TELEPORT_COORDINATES)
+            ? Optional.of(dataTag.getBoolean(StorageKey.PRINT_TELEPORT_COORDINATES))
+            : Optional.empty();
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound tag, RegistryWrapper.WrapperLookup wrapperLookup) {
-        if (this.profileOptions.formattingDefault != null) {
-            tag.putString(StorageKey.FORMATTING_DEAULT, ConfigUtil.serializeStyle(this.profileOptions.formattingDefault));
-        }
-        if (this.profileOptions.formattingAccent != null) {
-            tag.putString(StorageKey.FORMATTING_ACCENT, ConfigUtil.serializeStyle(this.profileOptions.formattingAccent));
-        }
-        if (this.profileOptions.formattingError != null) {
-            tag.putString(StorageKey.FORMATTING_ERROR, ConfigUtil.serializeStyle(this.profileOptions.formattingError));
-        }
-        tag.putBoolean(StorageKey.PRINT_TELEPORT_COORDINATES, this.profileOptions.printTeleportCoordinates);
+        this.profileOptions.formattingDefault
+            .ifPresent(style -> tag.putString(StorageKey.FORMATTING_DEAULT, ConfigUtil.serializeStyle(style)));
+
+        this.profileOptions.formattingAccent
+            .ifPresent(style -> tag.putString(StorageKey.FORMATTING_ACCENT, ConfigUtil.serializeStyle(style)));
+
+        this.profileOptions.formattingError
+            .ifPresent(style -> tag.putString(StorageKey.FORMATTING_ERROR, ConfigUtil.serializeStyle(style)));
+
+        this.profileOptions.printTeleportCoordinates.ifPresent(
+            printTeleportCoordinates -> tag.putBoolean(StorageKey.PRINT_TELEPORT_COORDINATES, printTeleportCoordinates));
+
         return tag;
     }
 

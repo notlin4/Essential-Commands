@@ -43,7 +43,7 @@ public final class ProfileCommand {
                     var player = context.getSource().getPlayerOrThrow();
                     var profile = ((ServerPlayerEntityAccess) player).ec$getProfile();
                     context.getSource().sendFeedback(() ->
-                        Text.literal(option.profileGetter().getValue(profile).toString()),
+                        Text.literal(option.profileGetter().getValue(profile).map(Object::toString).orElse("<not set>")),
                         CONFIG.BROADCAST_TO_OPS);
                     return 0;
                 })

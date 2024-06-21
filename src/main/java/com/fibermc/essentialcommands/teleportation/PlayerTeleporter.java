@@ -72,7 +72,7 @@ public final class PlayerTeleporter {
         var playerProfile = playerAccess.ec$getProfile();
         playerAccess.ec$getPlayerData().sendMessage(
             "teleport.done",
-            playerProfile.shouldPrintTeleportCoordinates()
+            playerProfile.shouldPrintTeleportCoordinates().orElse(CONFIG.PRINT_TELEPORT_COORDINATES)
                 ? TextUtil.join(
                     new Text[]{
                         destName,

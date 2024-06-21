@@ -12,11 +12,9 @@ import com.fibermc.essentialcommands.EssentialCommands;
 import com.fibermc.essentialcommands.ManagerLocator;
 import com.fibermc.essentialcommands.playerdata.PlayerDataManager;
 import com.fibermc.essentialcommands.types.RespawnCondition;
-
-import net.minecraft.registry.DynamicRegistryManager;
-
 import org.jetbrains.annotations.NotNull;
 
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -111,6 +109,7 @@ public final class EssentialCommandsConfig extends Config<EssentialCommandsConfi
     @ConfigOption public final Option<Integer> FLY_MAX_SPEED = new Option<>("fly_max_speed", 5, ConfigUtil::parseInt);
     @ConfigOption public final Option<Integer> NEAR_COMMAND_DEFAULT_RADIUS = new Option<>("near_command_default_radius", 200, ConfigUtil::parseInt);
     @ConfigOption public final Option<Integer> NEAR_COMMAND_MAX_RADIUS = new Option<>("near_command_max_radius", 200, ConfigUtil::parseInt);
+    @ConfigOption public final Option<Boolean> PRINT_TELEPORT_COORDINATES = new Option<>("print_teleport_coordinates", true, Boolean::parseBoolean);
 
     public EssentialCommandsConfig(Path savePath, String displayName, String documentationLink) {
         super(savePath, displayName, documentationLink);
