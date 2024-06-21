@@ -58,8 +58,12 @@ public final class PlayerTeleporter {
     }
 
     private static void execTeleport(ServerPlayerEntity playerEntity, MinecraftLocation dest, MutableText destName) {
+        var targetWorld = playerEntity.getServer().getWorld(dest.dim());
+        if (targetWorld == null) {
+            throw new NullPointerException(String.format("Could not find teleport target world, '%s'", dest.dim()));
+        }
         playerEntity.teleport(
-            playerEntity.getServer().getWorld(dest.dim()),
+            targetWorld,
             dest.pos().x, dest.pos().y, dest.pos().z,
             dest.headYaw(), dest.pitch()
         );
