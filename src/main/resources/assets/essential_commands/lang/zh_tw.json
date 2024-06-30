@@ -56,7 +56,7 @@
   "cmd.warp.list.start": "可用的伺服器傳送點有：",
   "cmd.day.error.already_daytime": "現在已是白天。",
   "cmd.day.feedback": "已將時間設為白天。",
-  "cmd.afk.error.in_combat": "無法在戰鬥中進入 AFK 狀態",
+  "cmd.afk.error.in_combat": "無法在戰鬥中進入離開狀態",
   "rules.reload.success": "已重新載入規則檔案。",
   "cmd.rules.reload.error.unexpected": "重新載入規則檔案時發生非預期的錯誤。伺服器控制台可能會包含更多資訊。",
   "cmd.bed.error.none_set":  "該玩家未設定重生點。",
@@ -71,8 +71,8 @@
   "cmd.night.error.already_nighttime": "現在已是夜晚。",
   "cmd.night.feedback": "已將時間設為夜晚。",
   "cmd.repair.error.not_damaged": "該物品未耗損。",
-  "cmd.repair.feedback": "已修復該物品。",
-  "cmd.near.error.range_too_high": "Range is limited to ${0}.",
+  "cmd.repair.feedback": "該物品已修復。",
+  "cmd.near.error.range_too_high": "已將距離限制為 ${0}。",
   "cmd.near.feedback.empty": "找不到玩家。",
   "cmd.near.feedback.list": "下列玩家在附近：${0}。",
 
@@ -83,8 +83,8 @@
   "cmd.list.feedback.empty": "找不到位置",
   "cmd.top.location_name": "世界表面",
 
-  "player.afk.enter": "${0} 正在 AFK 狀態。",
-  "player.afk.exit": "${0} 不再為 AFK 狀態。",
+  "player.afk.enter": "${0} 暫時離開了",
+  "player.afk.exit": "${0} 回來了。",
 
   "teleport.error.interdimensional_teleport_disabled": "傳送失敗。原因：已停用跨維度傳送。",
   "teleport.queued": "將在 ${1} 秒後傳送到 ${0}...",
