@@ -69,7 +69,7 @@
   "teleport.queued": "将在 ${1} 秒内传送至 ${0} ...",
   "teleport.done": "已传送至 ${0} 。",
   "teleport.interrupted.damage": "传送中断。原因：受到伤害。",
-  "teleport.interruped.moved": "传送中断。原因：移动。",
+  "teleport.interrupted.moved": "传送中断。原因：移动。",
   "teleport.request.expired.sender": "发送至 ${0} 的传送请求已过期。",
   "teleport.request.expired.receiver":  "来自 ${0} 的传送请求已过期。",
   "teleport.request.canceled_by_new": "传送至 ${0} 的操作已取消。原因：新的传送至 ${1} 的操作已开始。",

@@ -90,7 +90,7 @@
   "teleport.queued": "將在 ${1} 秒後傳送到 ${0}...",
   "teleport.done": "已傳送到 ${0}。",
   "teleport.interrupted.damage": "傳送中斷。原因：受到傷害",
-  "teleport.interruped.moved": "傳送中斷。原因：移動",
+  "teleport.interrupted.moved": "傳送中斷。原因：移動",
   "teleport.request.expired.sender": "給 ${0} 的傳送請求已過期。",
   "teleport.request.expired.receiver":  "來自 ${0} 的傳送請求已過期。",
   "teleport.request.canceled_by_new": "已取消待傳送到「${0}」。原因：開始新的傳送到「${1}」！",

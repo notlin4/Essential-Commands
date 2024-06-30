@@ -90,7 +90,7 @@
   "teleport.queued": "Teleporteren naar ${0} in ${1} seconden...",
   "teleport.done": "Teleporteren naar ${0}.",
   "teleport.interrupted.damage": "Teleportatie onderbroken. Reden: speler lijdt pijn.",
-  "teleport.interruped.moved": "Teleportatie onderbroken. Reden: speler bewoog.",
+  "teleport.interrupted.moved": "Teleportatie onderbroken. Reden: speler bewoog.",
   "teleport.request.expired.sender": "Teleportatie verzoek naar ${0} is verlopen.",
   "teleport.request.expired.receiver":  "Teleportatie verzoek van ${0} is verlopen.",
   "teleport.request.canceled_by_new": "Teleportatie in wachtrij naar '${0}' geannuleerd. Reden: Nieuwe teleportatie naar '${1}' gestart!",

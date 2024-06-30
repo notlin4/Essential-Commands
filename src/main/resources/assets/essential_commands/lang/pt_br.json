@@ -69,7 +69,7 @@
   "teleport.queued": "Teletransportando para ${0} em ${1} segundos...",
   "teleport.done": "Teletransportado para ${0}.",
   "teleport.interrupted.damage": "Teletransporte interrompido. Razão: Dano tomado",
-  "teleport.interruped.moved": "Teletransporte interrompido. Razão: Se moveu",
+  "teleport.interrupted.moved": "Teletransporte interrompido. Razão: Se moveu",
   "teleport.request.expired.sender": "Pedido de teletransporte para ${0} expirado.",
   "teleport.request.expired.receiver":  "Pedido de teletransporte de ${0} expirado.",
   "teleport.request.canceled_by_new": "Teleporte na fila para '${0}' cancelado. Razão: Novo teleporte para '${1}' começou!",

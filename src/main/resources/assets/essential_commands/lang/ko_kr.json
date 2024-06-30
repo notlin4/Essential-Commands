@@ -73,7 +73,7 @@
   "teleport.queued": "${1}초 뒤 ${0}으로 순간이동 됩니다...",
   "teleport.done": "${0}으로 순간이동 되었습니다.",
   "teleport.interrupted.damage": "순간이동에 실패하였습니다. 사유: 데미지 받음",
-  "teleport.interruped.moved": "순간이동에 실패하였습니다. 사유: 이동",
+  "teleport.interrupted.moved": "순간이동에 실패하였습니다. 사유: 이동",
   "teleport.request.expired.sender": "${0}에 대한 순간이동이 만료되었습니다.",
   "teleport.request.expired.receiver": "${0}으로부터의 순간이동이 만료되었습니다.",
   "teleport.request.canceled_by_new": "'${0}'으로의 순간이동 대기가 취소되었습니다. 사유: '${1}으로의 순간이동 시작!",

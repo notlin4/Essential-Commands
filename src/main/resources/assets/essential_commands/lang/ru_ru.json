@@ -69,7 +69,7 @@
   "teleport.queued": "Телепортирование к ${0} через ${1} секунд...",
   "teleport.done": "Телепортирование к ${0}.",
   "teleport.interrupted.damage": "Телепортация прервана. Причина: Получение урона",
-  "teleport.interruped.moved": "Телепортация прервана. Причина: Движение",
+  "teleport.interrupted.moved": "Телепортация прервана. Причина: Движение",
   "teleport.request.expired.sender": "Запрос на телепортацию к ${0} истек.",
   "teleport.request.expired.receiver": "Запрос на телепортацию от ${0} истек.",
   "teleport.request.canceled_by_new": "Очередь телепортации к '${0}' отменена. Причина: Новый телепорт к '${1}' начат!",

@@ -86,7 +86,7 @@
   "teleport.queued": "Téléportation vers ${0} dans ${1} secondes...",
   "teleport.done": "Téléportation vers ${0} effectuée.",
   "teleport.interrupted.damage": "Téléportation interrompue. Raison : Dommages subis.",
-  "teleport.interruped.moved": "Téléportation interrompue. Raison : Déplacement.",
+  "teleport.interrupted.moved": "Téléportation interrompue. Raison : Déplacement.",
   "teleport.request.expired.sender": "Demande de téléportation vers ${0} expirée.",
   "teleport.request.expired.receiver": "Demande de téléportation de ${0} expirée.",
   "teleport.request.canceled_by_new": "Téléportation vers '${0}' annulée. Raison : Nouvelle téléportation vers '${1}' commencée !",

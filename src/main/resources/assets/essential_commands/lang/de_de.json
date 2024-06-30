@@ -71,7 +71,7 @@
   "teleport.queued": "Teleportation zu ${0} in ${1} Sekunden...",
   "teleport.done": "Zu ${0} teleportiert.",
   "teleport.interrupted.damage": "Teleportation abgebrochen. Grund: Spieler hat Schaden erhalten",
-  "teleport.interruped.moved": "Teleportation abgebrochen. Grund: Spieler hat sich bewegt",
+  "teleport.interrupted.moved": "Teleportation abgebrochen. Grund: Spieler hat sich bewegt",
   "teleport.request.expired.sender": "Teleportanfrage an ${0} abgelaufen.",
   "teleport.request.expired.receiver":  "Teleportanfrage von ${0} abgelaufen.",
   "teleport.request.canceled_by_new": "Teleportation zu '${0}' abgebrochen. Grund: Neuer Teleport zu '${1}' gestartet!",

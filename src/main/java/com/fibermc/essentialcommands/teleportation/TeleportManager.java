@@ -91,7 +91,7 @@ public final class TeleportManager {
                 && playerData.getPlayer().getPos().distanceTo(queuedTeleport.initialPosition) > maxMoveBeforeInterrupt
                 && !PlayerTeleporter.playerHasTpRulesBypass(playerData.getPlayer(), ECPerms.Registry.bypass_teleport_interrupt_on_move)
             ) {
-                playerData.sendError("teleport.interruped.moved");
+                playerData.sendError("teleport.interrupted.moved");
                 tpQueueIter.remove();
                 continue;
             }
